@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+test() {
+  alert("HEY BUDDY!!");
 }
+}
+
+
+
+
+
+//goAnOtherPage() {
+ // this.navCtrl.setRoot(ListPage);
+//}
+

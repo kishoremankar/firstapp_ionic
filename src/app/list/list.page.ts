@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +21,7 @@ export class ListPage implements OnInit {
     'build'
   ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
+  constructor(public alertController: AlertController) {
     for (let i = 1; i < 11; i++) {
       this.items.push({
         title: 'Item ' + i,
@@ -31,6 +32,40 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async presentAlert(item) {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'About ::'+item.title,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertConfirm(item) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Message <strong>'+item.title+'</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
   // add back when alpha.4 is out
   // navigate(item) {
